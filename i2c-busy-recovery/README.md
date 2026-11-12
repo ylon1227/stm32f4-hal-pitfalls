@@ -1,4 +1,4 @@
-# STM32F4 I2C stuck BUSY / SCL SDA held low — runtime recovery (HAL)
+# STM32F4 I2C stuck BUSY / SCL SDA held low: runtime recovery (HAL)
 
 **Symptoms this fixes** (STM32F4, HAL, tested on STM32F411 + MPU-6050 + SSD1315 OLED, 400 kHz):
 
@@ -67,7 +67,7 @@ Also important: checking `BUSY` before calling HAL removed the 25 ms stalls, so 
 1. Confirm it is not a timing issue (loop period before the failure was a clean 1 ms).
 2. **Add observability first**: we sent a step code in our telemetry packet on every failure (which recovery step failed, BUSY state, SCL/SDA levels). Guessing without it cost us a whole evening.
 3. Read the real pin levels **with the pins disconnected from the peripheral**.
-4. Remove other bus devices / noisy neighbours one at a time (OLED, SD card) — they were not the cause here.
+4. Remove other bus devices / noisy neighbours one at a time (OLED, SD card), they were not the cause here.
 
 ## Related reports
 

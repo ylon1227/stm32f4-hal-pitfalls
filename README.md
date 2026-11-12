@@ -1,4 +1,4 @@
-# STM32F4 HAL pitfalls — field notes from a motor-driven embedded system
+# STM32F4 HAL pitfalls: field notes from a motor-driven embedded system
 
 Real bugs we hit using an **STM32F411** with **STM32Cube HAL** and common peripheral modules (I2C IMU and OLED, SPI microSD, motor drivers), each written up with:
 

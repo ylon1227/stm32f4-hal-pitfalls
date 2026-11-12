@@ -1,4 +1,4 @@
-# Blocking I2C to an OLED hangs the whole board — and the watchdog never fires
+# Blocking I2C to an OLED hangs the whole board, and the watchdog never fires
 
 ## Symptoms
 
@@ -11,7 +11,7 @@
 
 1. **The I2C bus gets stuck** after a corrupted transaction (SDA/SCL held low, BUSY set). See [`../i2c-busy-recovery/`](../i2c-busy-recovery/): in our later investigation the line holder turned out to be the **MCU's own I2C peripheral**, which a plain `DeInit/Init` does not release.
 2. **Every blocking HAL call then waits for its timeout.** With the original timeouts (20 ms per command byte, 100 ms per 128-byte page), one full-screen flush = 8 pages × (3 × 20 ms + 100 ms) ≈ **1.28 s**. Refreshing at 2 Hz means the main loop spends almost **100 % of its time** inside the OLED code. The 1 kHz control loop dropped to about 0.8 Hz; integrators that use the measured `dt` then received `dt ≈ 1.3 s` and diverged.
-3. **The watchdog was fed in the outer loop**, which still ran roughly every 1.3 s — **less than the 4 s IWDG timeout**. So the watchdog was happy while the system was functionally dead. Permanent hang.
+3. **The watchdog was fed in the outer loop**, which still ran roughly every 1.3 s, **less than the 4 s IWDG timeout**. So the watchdog was happy while the system was functionally dead. Permanent hang.
 
 ## Fix
 

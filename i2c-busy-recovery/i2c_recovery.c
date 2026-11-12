@@ -1,5 +1,5 @@
 /**
- * i2c_recovery.c — see i2c_recovery.h for the full story.
+ * i2c_recovery.c, see i2c_recovery.h for the full story.
  * License: MIT
  */
 #include "i2c_recovery.h"

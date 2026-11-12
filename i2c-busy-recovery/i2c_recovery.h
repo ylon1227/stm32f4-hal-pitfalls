@@ -1,5 +1,5 @@
 /**
- * i2c_recovery.h — Runtime recovery for a stuck STM32F4 I2C master (HAL)
+ * i2c_recovery.h, Runtime recovery for a stuck STM32F4 I2C master (HAL)
  *
  * Problem this solves
  *   On STM32F4 (tested on STM32F411, I2C1 @ 400 kHz, MPU-6050 + SSD1315 on the bus),
@@ -9,7 +9,7 @@
  *       regardless of the Timeout argument, then returns HAL_BUSY;
  *     - HAL_I2C_DeInit + HAL_I2C_Init (which pulses SWRST) does NOT release it;
  *     - power-cycling the slave does NOT help (the master is the one holding the lines);
- *     - only a full board power cycle helped — until the RCC peripheral reset below.
+ *     - only a full board power cycle helped, until the RCC peripheral reset below.
  *
  * What works
  *   1. HAL_I2C_DeInit()                       (PE off, clock off, pins de-initialised)
